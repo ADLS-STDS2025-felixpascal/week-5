@@ -115,17 +115,18 @@ tictoc::tic.log(format = TRUE)
 ## Comparison with Terra-based approach (Task 3.1)
 
 ```{r}
-# Beispiel-Zeiten aus deinem vorherigen Terra-Code
-terra_vector_time <- 180  # in Sekunden
-terra_raster_time <- 8    # in Sekunden
+# Runtime of the terra-based solution from week 2 (see: https://adls-stds2025-felixpascal.github.io/week-2/)
+# This plot shows that the vector approach took over 500 seconds, while the raster-based version was much faster.
+terra_raster_time <- 24     # Raster-based time from terra (based on previous work)
+terra_vector_time <- 540    # Vector-based time from terra (based on previous work)
 
-# Zeit aus GDAL zusammenzählen (unformatiertes Log für Summierung)
+# Time from GDAL-based workflow using tictoc log
 gdal_rawlog <- tictoc::tic.log(format = FALSE)
 gdal_total <- sum(unlist(lapply(gdal_rawlog, function(x) x$toc - x$tic)))
 
 comparison <- tibble(
-  Method = c("R (terra)", "GDAL CLI"),
-  Time = c(terra_raster_time, gdal_total)
+  Method = c("terra (Vector)", "terra (Raster)", "GDAL CLI"),
+  Time = c(terra_vector_time, terra_raster_time, gdal_total)
 )
 
 print(comparison)
@@ -133,24 +134,19 @@ print(comparison)
 library(ggplot2)
 ggplot(comparison, aes(x = Method, y = Time, fill = Method)) +
   geom_col() +
-  ylab("Time (s)") +
-  ggtitle("Raster Processing: R vs GDAL")
+  ylab("Time (seconds)") +
+  ggtitle("Execution Time: Vector vs Raster Approach")
 ```
 
 ---
 
 ## Conclusion
 
-T## Conclusion
+In this task, I tried to repeat the forest coverage analysis from week 1 using GDAL tools instead of R. I used `ogr2ogr` to extract the forest polygons and `gdal_rasterize` to turn them into a raster file. The zonal statistics were still done in R, because I couldn’t get `gdal_zonalstats.py` to work on my system.
 
-In this task, I used GDAL command-line tools to repeat the forest coverage analysis from previous weeks. The goal was to replace the R-based workflow with GDAL where possible.
+If I’ve done everything correctly, the results look pretty solid. The forest percentages for each canton seem reasonable and similar to what I got before.
 
-Most steps worked very well with GDAL. I used `ogr2ogr` to extract only forest polygons and `gdal_rasterize` to create raster layers for forest areas and cantonal borders. These steps were done in Bash code chunks inside a Quarto document. For the last step (zonal statistics), I used R again, because the preffered solution `gdal_zonalstats.py` was not available on my system.
+When I compared the execution times, I was a bit surprised: the GDAL-based workflow was faster than the full vector-based approach with `terra`, but not really faster than the raster-based one. Actually, `terra` was slightly faster here. I guess this could be because the dataset isn’t very big, and maybe because I ran the GDAL steps inside Quarto, which adds some overhead.
 
-The results look good and make sense. All cantons have realistic forest percentages, and there are no missing values.
-
-One interesting result is the execution time: even though GDAL is known for being fast, the total GDAL-based workflow took longer than the R version with the `terra` package. This is probably because each Bash command runs in a separate shell, which adds some overhead. Also, the zonal statistics were still calculated in R, not in pure GDAL.
-
-Overall, I learned that GDAL works well for raster processing, but for small datasets and in a scripting environment like Quarto, `terra` in R can be faster - if I did everything correctly. For larger or more complex data, GDAL might show better performance.
-
+Overall, I’d say GDAL is useful and worked well for the task, but for smaller datasets and when working directly in R, `terra` is also very efficient. For bigger projects or fully automated scripts, GDAL might still have an advantage.
 

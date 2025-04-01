@@ -125,7 +125,7 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Step 1: Extract forest polygons from GPKG: 4.5 sec elapsed</code></pre>
+<pre><code>Step 1: Extract forest polygons from GPKG: 5.91 sec elapsed</code></pre>
 </div>
 </div>
 <hr>
@@ -144,7 +144,7 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Step 2: Rasterize forest polygons: 10.55 sec elapsed</code></pre>
+<pre><code>Step 2: Rasterize forest polygons: 11.82 sec elapsed</code></pre>
 </div>
 </div>
 <hr>
@@ -163,7 +163,7 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Step 3: Rasterize canton boundaries: 1.81 sec elapsed</code></pre>
+<pre><code>Step 3: Rasterize canton boundaries: 2.22 sec elapsed</code></pre>
 </div>
 </div>
 <hr>
@@ -197,7 +197,7 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Step 4: Zonal statistics using terra: 6.64 sec elapsed</code></pre>
+<pre><code>Step 4: Zonal statistics using terra: 5.84 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gdal_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -238,16 +238,16 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] "Step 1: Extract forest polygons from GPKG: 4.5 sec elapsed"
+[1] "Step 1: Extract forest polygons from GPKG: 5.91 sec elapsed"
 
 [[2]]
-[1] "Step 2: Rasterize forest polygons: 10.55 sec elapsed"
+[1] "Step 2: Rasterize forest polygons: 11.82 sec elapsed"
 
 [[3]]
-[1] "Step 3: Rasterize canton boundaries: 1.81 sec elapsed"
+[1] "Step 3: Rasterize canton boundaries: 2.22 sec elapsed"
 
 [[4]]
-[1] "Step 4: Zonal statistics using terra: 6.64 sec elapsed"</code></pre>
+[1] "Step 4: Zonal statistics using terra: 5.84 sec elapsed"</code></pre>
 </div>
 </div>
 <hr>
@@ -255,32 +255,34 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 <section id="comparison-with-terra-based-approach-task-3.1" class="level2">
 <h2 class="anchored" data-anchor-id="comparison-with-terra-based-approach-task-3.1">Comparison with Terra-based approach (Task 3.1)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beispiel-Zeiten aus deinem vorherigen Terra-Code</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>terra_vector_time <span class="ot">&lt;-</span> <span class="dv">180</span>  <span class="co"># in Sekunden</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>terra_raster_time <span class="ot">&lt;-</span> <span class="dv">8</span>    <span class="co"># in Sekunden</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Zeit aus GDAL zusammenzählen (unformatiertes Log für Summierung)</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>gdal_rawlog <span class="ot">&lt;-</span> tictoc<span class="sc">::</span><span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>gdal_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(gdal_rawlog, <span class="cf">function</span>(x) x<span class="sc">$</span>toc <span class="sc">-</span> x<span class="sc">$</span>tic)))</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(<span class="st">"R (terra)"</span>, <span class="st">"GDAL CLI"</span>),</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="fu">c</span>(terra_raster_time, gdal_total)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Runtime of the terra-based solution from week 2 (see: https://adls-stds2025-felixpascal.github.io/week-2/)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This plot shows that the vector approach took over 500 seconds, while the raster-based version was much faster.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>terra_raster_time <span class="ot">&lt;-</span> <span class="dv">24</span>     <span class="co"># Raster-based time from terra (based on previous work)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>terra_vector_time <span class="ot">&lt;-</span> <span class="dv">540</span>    <span class="co"># Vector-based time from terra (based on previous work)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Time from GDAL-based workflow using tictoc log</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>gdal_rawlog <span class="ot">&lt;-</span> tictoc<span class="sc">::</span><span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>gdal_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(gdal_rawlog, <span class="cf">function</span>(x) x<span class="sc">$</span>toc <span class="sc">-</span> x<span class="sc">$</span>tic)))</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(<span class="st">"terra (Vector)"</span>, <span class="st">"terra (Raster)"</span>, <span class="st">"GDAL CLI"</span>),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="fu">c</span>(terra_vector_time, terra_raster_time, gdal_total)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  Method     Time
-  &lt;chr&gt;     &lt;dbl&gt;
-1 R (terra)   8  
-2 GDAL CLI   23.5</code></pre>
+<pre><code># A tibble: 3 × 2
+  Method          Time
+  &lt;chr&gt;          &lt;dbl&gt;
+1 terra (Vector) 540  
+2 terra (Raster)  24  
+3 GDAL CLI        25.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Time, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Time (s)"</span>) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Raster Processing: R vs GDAL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Time (seconds)"</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Execution Time: Vector vs Raster Approach"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -293,12 +295,10 @@ Execution time is measured using the <strong>tictoc</strong> package around bash
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>T## Conclusion</p>
-<p>In this task, I used GDAL command-line tools to repeat the forest coverage analysis from previous weeks. The goal was to replace the R-based workflow with GDAL where possible.</p>
-<p>Most steps worked very well with GDAL. I used <code>ogr2ogr</code> to extract only forest polygons and <code>gdal_rasterize</code> to create raster layers for forest areas and cantonal borders. These steps were done in Bash code chunks inside a Quarto document. For the last step (zonal statistics), I used R again, because the preffered solution <code>gdal_zonalstats.py</code> was not available on my system.</p>
-<p>The results look good and make sense. All cantons have realistic forest percentages, and there are no missing values.</p>
-<p>One interesting result is the execution time: even though GDAL is known for being fast, the total GDAL-based workflow took longer than the R version with the <code>terra</code> package. This is probably because each Bash command runs in a separate shell, which adds some overhead. Also, the zonal statistics were still calculated in R, not in pure GDAL.</p>
-<p>Overall, I learned that GDAL works well for raster processing, but for small datasets and in a scripting environment like Quarto, <code>terra</code> in R can be faster - if I did everything correctly. For larger or more complex data, GDAL might show better performance.</p>
+<p>In this task, I tried to repeat the forest coverage analysis from week 1 using GDAL tools instead of R. I used <code>ogr2ogr</code> to extract the forest polygons and <code>gdal_rasterize</code> to turn them into a raster file. The zonal statistics were still done in R, because I couldn’t get <code>gdal_zonalstats.py</code> to work on my system.</p>
+<p>If I’ve done everything correctly, the results look pretty solid. The forest percentages for each canton seem reasonable and similar to what I got before.</p>
+<p>When I compared the execution times, I was a bit surprised: the GDAL-based workflow was faster than the full vector-based approach with <code>terra</code>, but not really faster than the raster-based one. Actually, <code>terra</code> was slightly faster here. I guess this could be because the dataset isn’t very big, and maybe because I ran the GDAL steps inside Quarto, which adds some overhead.</p>
+<p>Overall, I’d say GDAL is useful and worked well for the task, but for smaller datasets and when working directly in R, <code>terra</code> is also very efficient. For bigger projects or fully automated scripts, GDAL might still have an advantage.</p>
 </section>
 </section>
 
